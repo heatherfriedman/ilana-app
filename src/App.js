@@ -2,6 +2,8 @@ import React from 'react';
 import { Home } from './Home';
 import io from 'socket.io-client';
 import { GlobalStyle } from './GlobalStyle';
+import { Switch, Route } from 'react-router-dom';
+import { Login } from './Login';
 
 export default function App() {
   const socket = io.connect('https://ilana-app.herokuapp.com/');
@@ -10,7 +12,14 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <Home socket={socket} />
+      <Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route path="/home">
+          <Home socket={socket} />
+        </Route>
+      </Switch>
     </>
   );
 }

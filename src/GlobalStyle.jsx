@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 body{
@@ -10,6 +10,7 @@ html, body, #app {
 }
 
 #app {
+    padding-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
