@@ -2,16 +2,17 @@ import { useEffect, useRef, useState } from 'react';
 import socketIOClient from 'socket.io-client';
 
 const NEW_CHAT_MESSAGE_EVENT = 'newChatMessage'; // Name of the event
-const SOCKET_SERVER_URL = 'https://ilana-app.herokuapp.com/';
+// const SOCKET_SERVER_URL = 'https://ilana-app.herokuapp.com/';
+const SOCKET_SERVER_URL = 'http://localhost:8080/';
 
-export const useChat = roomId => {
+export const useChat = (roomId, name) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
   const socketRef = useRef();
 
   useEffect(() => {
     // Creates a WebSocket connection
     socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
-      query: { roomId },
+      query: { roomId, name },
     });
 
     // Listens for incoming messages
@@ -37,7 +38,6 @@ export const useChat = roomId => {
       body: messageBody,
       senderId: socketRef.current.id,
     });
-    console.log('messages', messages);
   };
 
   return { messages, sendMessage };

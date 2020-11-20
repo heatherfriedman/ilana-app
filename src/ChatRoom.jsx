@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useChat } from './useChat';
+import { Message } from './Message';
 
 const MessageBox = styled.div`
   border: dotted;
@@ -27,8 +28,8 @@ const SendButton = styled.button`
 `;
 
 export const ChatRoom = props => {
-  const { roomId } = props.match.params;
-  const { messages, sendMessage } = useChat(roomId);
+  const { roomId, name } = props.match.params;
+  const { messages, sendMessage } = useChat(roomId, name);
   const [newMessage, setNewMessage] = useState('');
 
   const handleNewMessageChange = event => {
@@ -37,18 +38,23 @@ export const ChatRoom = props => {
 
   const handleSendMessage = () => {
     sendMessage(newMessage);
-
     setNewMessage('');
   };
+
+  useEffect(() => {
+    console.log('the messages:', messages);
+  }, [messages]);
+
+  const singleMessage = messages.map((message, i) => <Message key={i} message={message} />);
+
   return (
     <>
       <div>Ilana's App</div>
-      <div>Room: {roomId}</div>
-      <MessageBox>
-        {messages.map((message, i) => {
-          <div key={i}>{message.body}</div>;
-        })}
-      </MessageBox>
+      <div>Welcome {name}!</div>
+      <div>
+        You are in the <strong>{roomId}</strong> room
+      </div>
+      <MessageBox>{singleMessage}</MessageBox>
       <textarea
         value={newMessage}
         onChange={handleNewMessageChange}

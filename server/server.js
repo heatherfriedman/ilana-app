@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const socketIO = require('socket.io');
 const path = require('path');
 
 const port = process.env.PORT || 3001;
@@ -12,7 +12,7 @@ app.get('*', (_request, response) =>
   response.sendFile(path.resolve(`${__dirname}/../dist/index.html`)),
 );
 const server = app.listen(port, () => console.log(`server listening on ${port}.`));
-const io = require('socket.io')(server);
+const io = socketIO(server);
 
 io.on('connection', socket => {
   const { roomId } = socket.handshake.query;
@@ -21,7 +21,7 @@ io.on('connection', socket => {
 
   socket.on(NEW_CHAT_MESSAGE_EVENT, data => {
     io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
-    console.log(socket.id, 'said', data);
+    console.log(socket.id, 'said', `"${data.body}"`, 'in room', `"${roomId}"`);
   });
   socket.on('disconnect', () => {
     socket.leave(roomId);

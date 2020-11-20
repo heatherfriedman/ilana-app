@@ -11,7 +11,7 @@ export const App = () => {
       <GlobalStyle />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/:roomId" component={ChatRoom} />
+        <Route exact path="/:name/:roomId" component={ChatRoom} />
       </Switch>
     </Router>
   );
