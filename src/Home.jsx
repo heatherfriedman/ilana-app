@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
-const Input = styled.input``;
-
 export const Home = () => {
   const [roomName, setRoomName] = useState('');
   const history = useHistory();
