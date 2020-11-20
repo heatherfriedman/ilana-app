@@ -55,12 +55,13 @@ export const ChatRoom = props => {
         You are in the <strong>{roomId}</strong> room
       </div>
       <MessageBox>{singleMessage}</MessageBox>
+      <div>Click on "send message" button below to send your message!</div>
       <textarea
         value={newMessage}
         onChange={handleNewMessageChange}
         placeholder="Write a message"
       />
-      <SendButton onClick={handleSendMessage}>Send</SendButton>
+      <SendButton onClick={handleSendMessage}>Send Message</SendButton>
     </>
   );
 };
