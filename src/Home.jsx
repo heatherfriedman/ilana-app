@@ -1,37 +1,37 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Messages } from './Messages';
+import { useHistory } from 'react-router-dom';
 
-const MessageBox = styled.div`
-  border: dotted;
-  width: 300px;
-  height: 300px;
-  background-color: wheat;
-  margin: 10px;
-`;
+const Input = styled.input``;
 
-export const Home = ({ socket }) => {
-  const [chat, setChat] = useState('');
+export const Home = () => {
+  const [roomName, setRoomName] = useState('');
+  const history = useHistory();
 
-  const createMessage = e => {
-    setChat(e.target.value);
+  const handleRoomNameChange = event => {
+    setRoomName(event.target.value);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    socket.emit('chat message', chat);
-    return false;
+    history.push(`/${roomName}`);
   };
+
+  const JoinRoomButton = styled.input``;
 
   return (
     <>
       <div>Ilana's App</div>
-      <MessageBox>
-        <Messages socket={socket} />
-      </MessageBox>
       <form onSubmit={handleSubmit}>
-        <input type="text" onChange={createMessage}></input>
-        <input type="submit"></input>
+        <label>
+          Choose a room:
+          <select onChange={handleRoomNameChange}>
+            <option value="Language Exchange">Language Exchange</option>
+            <option value="Recipe Exchange"> Recipe Exchange</option>
+            <option value="Book Club">Book Club</option>
+          </select>
+        </label>
+        <JoinRoomButton type="submit" value="join room" />
       </form>
     </>
   );
