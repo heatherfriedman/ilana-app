@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const Message = ({ message }) => {
-  return <div>{message.body}</div>;
+export const Message = props => {
+  return <div>{props.message.body}</div>;
 };

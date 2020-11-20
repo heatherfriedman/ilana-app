@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import socketIOClient from 'socket.io-client';
 
 const NEW_CHAT_MESSAGE_EVENT = 'newChatMessage'; // Name of the event
-// const SOCKET_SERVER_URL = 'https://ilana-app.herokuapp.com/';
-const SOCKET_SERVER_URL = 'http://localhost:8080/';
+const SOCKET_SERVER_URL = 'https://ilana-app.herokuapp.com/';
+// const SOCKET_SERVER_URL = 'http://localhost:8080/';
 
 export const useChat = (roomId, name) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
@@ -19,7 +19,7 @@ export const useChat = (roomId, name) => {
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, message => {
       const incomingMessage = {
         ...message,
-        ownedByCurrentUser: message.senderId === socketRef.current.id,
+        ownedByCurrentUser: message.senderId === socketRef.current.id ? 'yes' : 'no',
       };
       setMessages(messages => [...messages, incomingMessage]);
     });
