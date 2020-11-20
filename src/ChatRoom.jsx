@@ -9,11 +9,11 @@ const MessageBox = styled.div`
   height: 300px;
   background-color: wheat;
   margin: 10px;
-`;
-
-const MessageForm = styled.form`
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  overflow-wrap: break-word;
+  overscroll-behavior-y: contain;
 `;
 
 const SendButton = styled.button`
