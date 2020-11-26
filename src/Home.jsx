@@ -6,7 +6,16 @@ const SignInForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  border: dotted;
+  padding: 20px;
+`;
+
+const HomeInput = styled.input`
+  font-size: 1em;
+`;
+
+const StyledDropDown = styled.select`
+  font-size: 1em;
 `;
 
 export const Home = () => {
@@ -44,17 +53,21 @@ export const Home = () => {
 
   return (
     <>
-      <div>Ilana's App</div>
+      <div>Senior Chat</div>
       <SignInForm onSubmit={handleSubmit}>
-        <label>Type in your name:</label>
-        <input type="text" placeholder="name" onChange={handleNameChange}></input>
-        <div>Choose a room:</div>
-        <select onChange={handleRoomNameChange}>
-          <option>Choose a room</option>
-          <option value="Language Exchange">Language Exchange</option>
-          <option value="Recipe Exchange"> Recipe Exchange</option>
-          <option value="Book Club">Book Club</option>
-        </select>
+        <label>
+          Type in your name:
+          <HomeInput type="text" placeholder="name" onChange={handleNameChange}></HomeInput>
+        </label>
+        <label>
+          Choose a room:
+          <StyledDropDown onChange={handleRoomNameChange}>
+            <option>Choose a room</option>
+            <option value="Language Exchange">Language Exchange</option>
+            <option value="Recipe Exchange"> Recipe Exchange</option>
+            <option value="Book Club">Book Club</option>
+          </StyledDropDown>
+        </label>
         <JoinRoomButton type="submit" value="join room" />
         {nameFlag && <div>Please input name</div>}
         {roomFlag && <div>Please select a room</div>}

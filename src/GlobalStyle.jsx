@@ -14,7 +14,11 @@ html, body, #app {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: violet;
+    background: plum;
+    overflow-y: scroll;
+    color: black;
+    font-size: 1em;
+    font-weight: bold;
 }
 
 

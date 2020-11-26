@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useChat } from './useChat';
 import { Message } from './Message';
+import { UsersInRoom } from './UsersInRoom';
 
 const MessageBox = styled.div`
   border: dotted;
@@ -25,6 +26,21 @@ const SendButton = styled.button`
     background-color: green;
     color: white;
   }
+`;
+
+const SideBar = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const SideBox = styled.div`
+  height: 300px;
+  width: 100px;
+  background-color: red;
+`;
+
+const MessageText = styled.textarea`
+  min-height: 3em;
 `;
 
 export const ChatRoom = props => {
@@ -54,13 +70,16 @@ export const ChatRoom = props => {
       <div>
         You are in the <strong>{roomId}</strong> room
       </div>
-      <MessageBox>{singleMessage}</MessageBox>
-      <div>Click on "send message" button below to send your message!</div>
-      <textarea
+      <SideBar>
+        <MessageBox>{singleMessage}</MessageBox>
+      </SideBar>
+      <MessageText
+        type="text"
         value={newMessage}
         onChange={handleNewMessageChange}
         placeholder="Write a message"
       />
+      <div>Click on "send message" button below to send your message!</div>
       <SendButton onClick={handleSendMessage}>Send Message</SendButton>
     </>
   );

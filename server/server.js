@@ -15,13 +15,14 @@ const server = app.listen(port, () => console.log(`server listening on ${port}.`
 const io = socketIO(server);
 
 io.on('connection', socket => {
-  const { roomId } = socket.handshake.query;
+  const { roomId, name } = socket.handshake.query;
   socket.join(roomId);
-  console.log(socket.id, 'joined', roomId);
+  socket.on('connection', user => {
+    io.in(roomId).emit('connection', user);
+  });
 
   socket.on(NEW_CHAT_MESSAGE_EVENT, data => {
     io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
-    console.log(socket.id, 'said', `"${data.body}"`, 'in room', `"${roomId}"`);
   });
   socket.on('disconnect', () => {
     socket.leave(roomId);
