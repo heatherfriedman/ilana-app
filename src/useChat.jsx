@@ -2,13 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 import socketIOClient from 'socket.io-client';
 
 const NEW_CHAT_MESSAGE_EVENT = 'newChatMessage'; // Name of the event
-const SOCKET_SERVER_URL = 'https://ilana-app.herokuapp.com/';
-//const SOCKET_SERVER_URL = 'http://localhost:8080/';
+// Uncomment out below for heroku deployment
+// const SOCKET_SERVER_URL = 'https://ilana-app.herokuapp.com/';
+
+// Uncomment out below for local development
+const SOCKET_SERVER_URL = 'http://localhost:8080/';
 
 export const useChat = (roomId, name) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
-  const [users, setUsers] = useState([]); // all users in room
   const socketRef = useRef();
+  const [users, setUsers] = useState([]); // All users
 
   useEffect(() => {
     // Creates a WebSocket connection
@@ -20,15 +23,15 @@ export const useChat = (roomId, name) => {
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, message => {
       const incomingMessage = {
         ...message,
-        ownedByCurrentUser: message.senderId === socketRef.current.id ? 'yes' : 'no',
+        ownedByCurrentUser: message.senderId === socketRef.current.id,
       };
       setMessages(messages => [...messages, incomingMessage]);
     });
 
     //Listens for new user
-    socketRef.current.on('connection', newUser => {
-      newUser = name;
-      setUsers(users => [...users, newUser]);
+    socketRef.current.on('newJoin', newUser => {
+      const newPerson = newUser;
+      setUsers(users => [...users, newPerson]);
     });
 
     // Destroys the socket reference
@@ -48,5 +51,5 @@ export const useChat = (roomId, name) => {
     });
   };
 
-  return { messages, sendMessage };
+  return { messages, sendMessage, users };
 };

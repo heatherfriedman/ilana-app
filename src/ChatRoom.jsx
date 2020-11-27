@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useChat } from './useChat';
 import { Message } from './Message';
-import { UsersInRoom } from './UsersInRoom';
+import { User } from './User';
 
 const MessageBox = styled.div`
   border: dotted;
@@ -45,7 +45,7 @@ const MessageText = styled.textarea`
 
 export const ChatRoom = props => {
   const { roomId, name } = props.match.params;
-  const { messages, sendMessage } = useChat(roomId, name);
+  const { messages, sendMessage, users } = useChat(roomId, name);
   const [newMessage, setNewMessage] = useState('');
 
   const handleNewMessageChange = event => {
@@ -59,9 +59,16 @@ export const ChatRoom = props => {
 
   useEffect(() => {
     console.log('the messages:', messages);
-  }, [messages]);
+    console.log('the users', users);
+  }, [messages, users]);
 
-  const singleMessage = messages.map((message, i) => <Message key={i} message={message} />);
+  const singleMessage = messages.map((message, i) => (
+    <Message key={i} ownedByCurrentUser={message.ownedByCurrentUser} message={message} />
+  ));
+
+  const usersInRoom = users.map((user, i) => {
+    <User key={`user${i}`} user={user} />;
+  });
 
   return (
     <>
@@ -72,6 +79,7 @@ export const ChatRoom = props => {
       </div>
       <SideBar>
         <MessageBox>{singleMessage}</MessageBox>
+        <SideBox>Users In Room: {usersInRoom}</SideBox>
       </SideBar>
       <MessageText
         type="text"

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { BlueButtonInput } from './Styles';
 
 const SignInForm = styled.form`
   display: flex;
@@ -49,8 +50,6 @@ export const Home = () => {
     }
   };
 
-  const JoinRoomButton = styled.input``;
-
   return (
     <>
       <div>Senior Chat</div>
@@ -68,7 +67,7 @@ export const Home = () => {
             <option value="Book Club">Book Club</option>
           </StyledDropDown>
         </label>
-        <JoinRoomButton type="submit" value="join room" />
+        <BlueButtonInput type="submit" value="join room" />
         {nameFlag && <div>Please input name</div>}
         {roomFlag && <div>Please select a room</div>}
       </SignInForm>

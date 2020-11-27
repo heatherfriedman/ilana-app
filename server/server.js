@@ -17,14 +17,14 @@ const io = socketIO(server);
 io.on('connection', socket => {
   const { roomId, name } = socket.handshake.query;
   socket.join(roomId);
-  socket.on('connection', user => {
-    io.in(roomId).emit('connection', user);
-  });
+  console.log(name, 'joined');
+  io.in(roomId).emit('newJoin', name);
 
   socket.on(NEW_CHAT_MESSAGE_EVENT, data => {
     io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
   });
   socket.on('disconnect', () => {
     socket.leave(roomId);
+    console.log(name, 'left');
   });
 });
