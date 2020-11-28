@@ -7,19 +7,19 @@ body{
 
 html, body, #app {
     height: 100%;
+    overflow-y: scroll;
 }
 
 #app {
-    padding-top: 50px;
+     font-family: Arial;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: plum;
-    overflow-y: scroll;
-    color: black;
+    justify-content: center;
+    background: #63b8ee;;
+    color: #071a34;
     font-size: 1em;
     font-weight: bold;
+    overflow-y: scroll;
 }
-
-
 `;

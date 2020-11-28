@@ -3,29 +3,19 @@ import styled from 'styled-components';
 import { useChat } from './useChat';
 import { Message } from './Message';
 import { User } from './User';
+import { PlumButton } from './Styles';
 
 const MessageBox = styled.div`
-  border: dotted;
+  border: double;
   width: 300px;
   height: 300px;
-  background-color: wheat;
+  background-color: plum;
   margin: 10px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
   overflow-wrap: break-word;
   overscroll-behavior-y: contain;
-`;
-
-const SendButton = styled.button`
-  background-color: white;
-  border: solid;
-  margin: 5px;
-
-  &:hover {
-    background-color: green;
-    color: white;
-  }
 `;
 
 const SideBar = styled.div`
@@ -41,6 +31,12 @@ const SideBox = styled.div`
 
 const MessageText = styled.textarea`
   min-height: 3em;
+  margin-bottom: 5px;
+`;
+
+const Title = styled.h1`
+  line-height: 1px;
+  padding-top: 80px;
 `;
 
 export const ChatRoom = props => {
@@ -72,14 +68,21 @@ export const ChatRoom = props => {
 
   return (
     <>
-      <div>Ilana's App</div>
-      <div>Welcome {name}!</div>
+      <Title>Senior Chat</Title>
       <div>
-        You are in the <strong>{roomId}</strong> room
+        Welcome <i>{name}</i>!
       </div>
+      <div>
+        You are in the{' '}
+        <i>
+          <u>{roomId}</u>
+        </i>{' '}
+        room
+      </div>
+
       <SideBar>
         <MessageBox>{singleMessage}</MessageBox>
-        <SideBox>Users In Room: {usersInRoom}</SideBox>
+        {/* <SideBox>Users In Room: {usersInRoom}</SideBox> */}
       </SideBar>
       <MessageText
         type="text"
@@ -87,8 +90,7 @@ export const ChatRoom = props => {
         onChange={handleNewMessageChange}
         placeholder="Write a message"
       />
-      <div>Click on "send message" button below to send your message!</div>
-      <SendButton onClick={handleSendMessage}>Send Message</SendButton>
+      <PlumButton onClick={handleSendMessage}>Send Message</PlumButton>
     </>
   );
 };

@@ -7,16 +7,34 @@ const SignInForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: dotted;
+  border: 0.1px;
+  box-shadow: 2px 5px 20px 3px rgba(0, 0, 0, 0.54);
   padding: 20px;
+  background-color: plum;
 `;
 
-const HomeInput = styled.input`
+const NameInput = styled.input`
   font-size: 1em;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 6px;
+  margin-left: 5px;
 `;
 
-const StyledDropDown = styled.select`
+const RoomDropDown = styled.select`
   font-size: 1em;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 6px;
+  margin-left: 5px;
+`;
+
+const Title = styled.h1``;
+
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Home = () => {
@@ -51,26 +69,26 @@ export const Home = () => {
   };
 
   return (
-    <>
-      <div>Senior Chat</div>
+    <Main>
+      <Title>Senior Chat</Title>
       <SignInForm onSubmit={handleSubmit}>
         <label>
           Type in your name:
-          <HomeInput type="text" placeholder="name" onChange={handleNameChange}></HomeInput>
+          <NameInput type="text" placeholder="name" onChange={handleNameChange}></NameInput>
         </label>
         <label>
           Choose a room:
-          <StyledDropDown onChange={handleRoomNameChange}>
+          <RoomDropDown onChange={handleRoomNameChange}>
             <option>Choose a room</option>
             <option value="Language Exchange">Language Exchange</option>
             <option value="Recipe Exchange"> Recipe Exchange</option>
             <option value="Book Club">Book Club</option>
-          </StyledDropDown>
+          </RoomDropDown>
         </label>
         <BlueButtonInput type="submit" value="join room" />
         {nameFlag && <div>Please input name</div>}
         {roomFlag && <div>Please select a room</div>}
       </SignInForm>
-    </>
+    </Main>
   );
 };
