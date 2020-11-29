@@ -13,6 +13,8 @@ const MessageLine = styled.div`
 const Name = styled.span`
   color: #070e34;
   white-space: pre-wrap;
+  font-size: 10px;
+  vertical-align: super;
 `;
 
 export const Message = props => {
