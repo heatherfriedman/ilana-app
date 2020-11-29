@@ -2,14 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MessageLine = styled.div`
-  border: solid;
-  border-radius: 8px;
+  background: ${props => (props.$ownedByCurrentUser ? 'white' : 'lightgrey')};
+  padding: 5px;
+  text-align: ${props => (props.$ownedByCurrentUser ? 'left' : 'right')};
+
+  &:hover {
+    opacity: 0.6;
+  }
+`;
+const Name = styled.span`
+  color: #070e34;
+  white-space: pre-wrap;
 `;
 
 export const Message = props => {
   return (
-    <MessageLine>
-      <strong>{props.message.name}:</strong> {props.message.body}
+    <MessageLine $ownedByCurrentUser={props.ownedByCurrentUser}>
+      <Name>{props.message.name}: </Name>
+      {props.message.body}
     </MessageLine>
   );
 };

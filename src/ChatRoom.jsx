@@ -8,7 +8,7 @@ import { PlumButton } from './Styles';
 const MessageBox = styled.div`
   border: double;
   width: 300px;
-  height: 300px;
+  height: 200px;
   background-color: plum;
   margin: 10px;
   overflow-y: scroll;
@@ -18,25 +18,44 @@ const MessageBox = styled.div`
   overscroll-behavior-y: contain;
 `;
 
-const SideBar = styled.div`
+const ViewMessages = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const SideBox = styled.div`
-  height: 300px;
-  width: 100px;
-  background-color: red;
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const MessageText = styled.textarea`
   min-height: 3em;
   margin-bottom: 5px;
+  width: 300px;
 `;
 
 const Title = styled.h1`
-  line-height: 1px;
   padding-top: 80px;
+  font-size: 24px;
+  margin: 0;
+`;
+
+const Name = styled.h2`
+  font-size: 20px;
+  margin: 0;
+`;
+
+const Room = styled.h3`
+  font-size: 15px;
+  margin: 0;
 `;
 
 export const ChatRoom = props => {
@@ -53,10 +72,10 @@ export const ChatRoom = props => {
     setNewMessage('');
   };
 
-  useEffect(() => {
-    console.log('the messages:', messages);
-    console.log('the users', users);
-  }, [messages, users]);
+  // useEffect(() => {
+  //   console.log('the messages:', messages);
+  //   console.log('the users', users);
+  // }, [messages, users]);
 
   const singleMessage = messages.map((message, i) => (
     <Message key={i} ownedByCurrentUser={message.ownedByCurrentUser} message={message} />
@@ -68,29 +87,29 @@ export const ChatRoom = props => {
 
   return (
     <>
-      <Title>Senior Chat</Title>
-      <div>
-        Welcome <i>{name}</i>!
-      </div>
-      <div>
-        You are in the{' '}
-        <i>
-          <u>{roomId}</u>
-        </i>{' '}
-        room
-      </div>
-
-      <SideBar>
-        <MessageBox>{singleMessage}</MessageBox>
-        {/* <SideBox>Users In Room: {usersInRoom}</SideBox> */}
-      </SideBar>
-      <MessageText
-        type="text"
-        value={newMessage}
-        onChange={handleNewMessageChange}
-        placeholder="Write a message"
-      />
-      <PlumButton onClick={handleSendMessage}>Send Message</PlumButton>
+      <Header>
+        <Title>Senior Chat</Title>
+        <Name>
+          Welcome <i>{name}</i>!
+        </Name>
+        <Room>
+          You are in the <u>{roomId}</u> room
+        </Room>
+      </Header>
+      <Main>
+        <ViewMessages>
+          <MessageBox>{singleMessage}</MessageBox>
+          {/* <SideBox>Users In Room: {usersInRoom}</SideBox> */}
+        </ViewMessages>
+        <MessageText
+          aria-label="write a message"
+          type="text"
+          value={newMessage}
+          onChange={handleNewMessageChange}
+          placeholder="Write a message"
+        />
+        <PlumButton onClick={handleSendMessage}>Send Message</PlumButton>
+      </Main>
     </>
   );
 };

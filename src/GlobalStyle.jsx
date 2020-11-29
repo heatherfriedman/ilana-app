@@ -11,15 +11,16 @@ html, body, #app {
 }
 
 #app {
-     font-family: Arial;
+    font-family: Arial;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #63b8ee;;
+    background: #63b8ee;
     color: #071a34;
     font-size: 1em;
     font-weight: bold;
     overflow-y: scroll;
+    padding: 30px;
 }
 `;
