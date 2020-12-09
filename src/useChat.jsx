@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+
 import socketIOClient from 'socket.io-client';
 
 const NEW_CHAT_MESSAGE_EVENT = 'newChatMessage'; // Name of the event
 // Uncomment out below for heroku deployment
-const SOCKET_SERVER_URL = 'https://ilana-app.herokuapp.com/';
+const SOCKET_SERVER_URL = 'https://mind-the-gap.herokuapp.com/';
 
 // Uncomment out below for local development
 // const SOCKET_SERVER_URL = 'http://localhost:8080/';
