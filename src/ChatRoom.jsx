@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+
+import { Message } from './Message';
+import { PlumButton } from './Styles';
+import { User } from './User';
 import styled from 'styled-components';
 import { useChat } from './useChat';
-import { Message } from './Message';
-import { User } from './User';
-import { PlumButton } from './Styles';
 
 const MessageBox = styled.div`
   border: double;
@@ -88,7 +89,7 @@ export const ChatRoom = props => {
   return (
     <>
       <Header>
-        <Title>Senior Chat</Title>
+        <Title>Mind the Gap</Title>
         <Name>
           Welcome <i>{name}</i>!
         </Name>

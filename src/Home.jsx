@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+
+import { BlueButtonInput } from './Styles';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import { BlueButtonInput } from './Styles';
 
 const SignInForm = styled.form`
   display: flex;
@@ -70,7 +71,7 @@ export const Home = () => {
 
   return (
     <Main>
-      <Title>Senior Chat</Title>
+      <Title>Mind The Gap</Title>
       <SignInForm onSubmit={handleSubmit}>
         <label>
           Type in your name:
